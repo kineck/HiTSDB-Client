@@ -2,19 +2,19 @@ package com.aliyun.hitsdb.client;
 
 import com.aliyun.hitsdb.client.callback.BatchPutCallback;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
-import com.aliyun.hitsdb.client.exception.http.HttpUnknowStatusException;
 import com.aliyun.hitsdb.client.value.Result;
 import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,18 +31,18 @@ public class TestHiTSDBClientSingleTimePointQuery {
     final String tagv2 = "test-tagv2";
 
     private void generateDataPoints() {
-        if(pointsMap == null) {
+        if (pointsMap == null) {
             pointsMap = new HashMap();
         } else {
             pointsMap.clear();
         }
         long baseTimeInSecond = System.currentTimeMillis() / 1000;
-        for(int i = 0; i < dataSize; i++) {
+        for (int i = 0; i < dataSize; i++) {
             long ts = baseTimeInSecond + i;
             Point point = Point
                     .metric(metric)
                     .tag(tagk1, tagv1)
-                    .tag(tagk2,tagv2)
+                    .tag(tagk2, tagv2)
                     .timestamp(ts)
                     .value(ts)
                     .build();
@@ -51,7 +51,7 @@ public class TestHiTSDBClientSingleTimePointQuery {
     }
 
     private void putData() {
-        for(Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
+        for (Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
             tsdb.putSync(entry.getValue());
         }
     }
@@ -62,7 +62,7 @@ public class TestHiTSDBClientSingleTimePointQuery {
     public void init() throws HttpClientInitException {
         pointsMap = new HashMap();
         generateDataPoints();
-        BatchPutCallback pcb = new BatchPutCallback(){
+        BatchPutCallback pcb = new BatchPutCallback() {
 
             final AtomicInteger num = new AtomicInteger();
 
@@ -100,7 +100,7 @@ public class TestHiTSDBClientSingleTimePointQuery {
 
     @Test
     public void testQuery() {
-        for(Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
+        for (Map.Entry<Long, Point> entry : pointsMap.entrySet()) {
             long timestamp = entry.getKey();
             Query query = Query
                     .timeRange(timestamp, timestamp)
@@ -108,12 +108,12 @@ public class TestHiTSDBClientSingleTimePointQuery {
                             .metric(metric)
                             .aggregator(Aggregator.NONE)
                             .tag(tagk1, tagv1)
-                            .tag(tagk2,tagv2)
+                            .tag(tagk2, tagv2)
                             .build())
                     .build();
             List<QueryResult> result = tsdb.query(query);
             Assert.assertEquals(1, result.size());
-            Assert.assertEquals(timestamp, ((BigDecimal)result.get(0).getDps().get(timestamp)).longValue());
+            Assert.assertEquals(timestamp, ((BigDecimal) result.get(0).getDps().get(timestamp)).longValue());
         }
     }
 }

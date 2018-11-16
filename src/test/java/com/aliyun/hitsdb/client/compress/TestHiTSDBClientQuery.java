@@ -1,14 +1,5 @@
 package com.aliyun.hitsdb.client.compress;
 
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.aliyun.hitsdb.client.HiTSDB;
 import com.aliyun.hitsdb.client.HiTSDBClientFactory;
 import com.aliyun.hitsdb.client.HiTSDBConfig;
@@ -18,6 +9,14 @@ import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class TestHiTSDBClientQuery {
 
@@ -29,7 +28,7 @@ public class TestHiTSDBClientQuery {
                 .address("127.0.0.1", 8242)
                 .httpCompress(true)
                 .config();
-        
+
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -51,8 +50,8 @@ public class TestHiTSDBClientQuery {
 
         Query query = Query.timeRange(startTime, now).sub(
                 SubQuery.metric("test1")
-                .aggregator(Aggregator.AVG)
-                .tag("tagk1", "tagv1").build()
+                        .aggregator(Aggregator.AVG)
+                        .tag("tagk1", "tagv1").build()
         ).build();
 
         List<QueryResult> result = tsdb.query(query);
@@ -63,8 +62,8 @@ public class TestHiTSDBClientQuery {
     public void testQueryCallback() {
 
         Query query = Query.timeRange(1501655667, 1501742067)
-        		.sub(SubQuery.metric("mem.usage.GB").aggregator(Aggregator.AVG).tag("site", "et2").tag("appname", "hitsdb").build())
-            .build();
+                .sub(SubQuery.metric("mem.usage.GB").aggregator(Aggregator.AVG).tag("site", "et2").tag("appname", "hitsdb").build())
+                .build();
 
         QueryCallback cb = new QueryCallback() {
 

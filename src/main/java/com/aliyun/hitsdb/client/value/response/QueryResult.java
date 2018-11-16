@@ -9,15 +9,15 @@ public class QueryResult extends JSONValue {
     private Map<String, String> tags;
     private List<String> aggregateTags;
     private LinkedHashMap<Long, Object> dps = new LinkedHashMap<Long, Object>();
-    
+
     @Deprecated
     private LinkedHashMap<Long, String> sdps = new LinkedHashMap<Long, String>();
 
     private static final Comparator<KeyValue> ORDER_CMP = new Comparator<KeyValue>() {
         @Override
         public int compare(KeyValue keyValue, KeyValue t1) {
-           long diff = keyValue.getTimestamp() - t1.getTimestamp();
-           return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
+            long diff = keyValue.getTimestamp() - t1.getTimestamp();
+            return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
         }
     };
 
@@ -29,26 +29,26 @@ public class QueryResult extends JSONValue {
         }
     };
 
-    public List<KeyValue> getOrderDps(){
-       return getOrderDps(false);
+    public List<KeyValue> getOrderDps() {
+        return getOrderDps(false);
     }
 
-    public List<KeyValue> getOrderDps(boolean reverse){
-        if(dps == null || dps.isEmpty()){
+    public List<KeyValue> getOrderDps(boolean reverse) {
+        if (dps == null || dps.isEmpty()) {
             return Collections.emptyList();
         }
         List<KeyValue> keyValues = new ArrayList<KeyValue>(dps.size());
-        for(Map.Entry<Long,Object> entry : dps.entrySet()){
-            keyValues.add(new KeyValue(entry.getKey(),entry.getValue()));
+        for (Map.Entry<Long, Object> entry : dps.entrySet()) {
+            keyValues.add(new KeyValue(entry.getKey(), entry.getValue()));
         }
-        if(reverse){
-            Collections.sort(keyValues,REVERSE_ORDER_CMP);
+        if (reverse) {
+            Collections.sort(keyValues, REVERSE_ORDER_CMP);
         } else {
-            Collections.sort(keyValues,ORDER_CMP);
+            Collections.sort(keyValues, ORDER_CMP);
         }
         return keyValues;
     }
-    
+
     public List<String> getAggregateTags() {
         return aggregateTags;
     }

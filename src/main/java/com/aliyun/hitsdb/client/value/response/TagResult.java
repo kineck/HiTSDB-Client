@@ -1,15 +1,15 @@
 package com.aliyun.hitsdb.client.value.response;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.hitsdb.client.value.JSONValue;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.aliyun.hitsdb.client.value.JSONValue;
 
 public class TagResult extends JSONValue {
     private String tagKey;

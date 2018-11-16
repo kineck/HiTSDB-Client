@@ -1,12 +1,12 @@
 package com.aliyun.hitsdb.client.http.request;
 
-import java.net.URI;
-
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+
+import java.net.URI;
 
 public class HttpDeleteWithEntity extends HttpEntityEnclosingRequestBase {
     public final static String METHOD_NAME = "DELETE";
-    
+
     public HttpDeleteWithEntity() {
         super();
     }

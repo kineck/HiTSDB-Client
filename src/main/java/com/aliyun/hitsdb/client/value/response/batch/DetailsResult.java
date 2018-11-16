@@ -1,8 +1,8 @@
 package com.aliyun.hitsdb.client.value.response.batch;
 
-import java.util.List;
-
 import com.aliyun.hitsdb.client.value.Result;
+
+import java.util.List;
 
 public class DetailsResult extends Result {
     private List<ErrorPoint> errors;

@@ -12,5 +12,5 @@ public class HttpServerErrorException extends HttpUnknowStatusException {
         super(result);
     }
 
-    private static final long serialVersionUID = -7013317353179949073L;    
+    private static final long serialVersionUID = -7013317353179949073L;
 }

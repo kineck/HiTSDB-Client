@@ -1,19 +1,15 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Random;
-
+import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import com.aliyun.hitsdb.client.value.request.Point;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.HiTSDB;
-import com.aliyun.hitsdb.client.HiTSDBClientFactory;
-import com.aliyun.hitsdb.client.HiTSDBConfig;
-import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
-import com.aliyun.hitsdb.client.value.request.Point;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Random;
 
 public class TestHiTSDBClientBatchPutNoLogic {
     private static int getTime() {
@@ -57,46 +53,46 @@ public class TestHiTSDBClientBatchPutNoLogic {
     public void testLargeDateBatchPutDataCallback() {
         Random random = new Random();
         int time = getTime();
-        for(int i = 0;i<100000;i++) {
+        for (int i = 0; i < 100000; i++) {
             double nextDouble = random.nextDouble() * 100;
             Point point = Point.metric("test1")
-                                   .tag("tagk1", "tagv1")
-                                   .tag("tagk2", "tagv2")
-                                   .tag("tagk3", "tagv3")
-                                   .timestamp(time + i).value(nextDouble)
-                                   .build();
+                    .tag("tagk1", "tagv1")
+                    .tag("tagk2", "tagv2")
+                    .tag("tagk3", "tagv3")
+                    .timestamp(time + i).value(nextDouble)
+                    .build();
             tsdb.put(point);
         }
     }
-    
+
     @Test
     public void testMiddleDateBatchPutDataCallback() {
         Random random = new Random();
         int time = getTime();
-        for(int i = 0;i<5500;i++) {
+        for (int i = 0; i < 5500; i++) {
             double nextDouble = random.nextDouble() * 100;
             Point point = Point.metric("test1")
-                                   .tag("tagk1", "tagv1")
-                                   .tag("tagk2", "tagv2")
-                                   .tag("tagk3", "tagv3")
-                                   .timestamp(time + i).value(nextDouble)
-                                   .build();
+                    .tag("tagk1", "tagv1")
+                    .tag("tagk2", "tagv2")
+                    .tag("tagk3", "tagv3")
+                    .timestamp(time + i).value(nextDouble)
+                    .build();
             tsdb.put(point);
         }
     }
-    
+
     @Test
     public void testLitterDateBatchPutDataCallback() {
         Random random = new Random();
         int time = getTime();
-        for(int i = 0;i<4000;i++) {
+        for (int i = 0; i < 4000; i++) {
             double nextDouble = random.nextDouble() * 100;
             Point point = Point.metric("test1")
-                                   .tag("tagk1", "tagv1")
-                                   .tag("tagk2", "tagv2")
-                                   .tag("tagk3", "tagv3")
-                                   .timestamp(time + i).value(nextDouble)
-                                   .build();
+                    .tag("tagk1", "tagv1")
+                    .tag("tagk2", "tagv2")
+                    .tag("tagk3", "tagv3")
+                    .timestamp(time + i).value(nextDouble)
+                    .build();
             tsdb.put(point);
         }
     }

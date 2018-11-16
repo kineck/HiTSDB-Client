@@ -1,19 +1,18 @@
 package com.aliyun.hitsdb.client.value;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import com.aliyun.hitsdb.client.value.request.Point;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.value.request.Point;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class TestMetricPointStringValue {
-    
+
     private String metric;
     private long time;
-    
+
     @Before
     public void init() throws ParseException {
         metric = "test";
@@ -21,7 +20,7 @@ public class TestMetricPointStringValue {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         time = sdf.parse(strDate).getTime();
     }
-    
+
     @Test
     public void testPoint0() {
         int timestamp = (int) (time / 1000);
@@ -36,7 +35,7 @@ public class TestMetricPointStringValue {
         Assert.assertEquals(json,
                 "{\"metric\":\"test\",\"stringValue\":\"456789\",\"tags\":{\"tagk1\":\"tagv1\",\"tagk2\":\"tagv2\",\"tagk3\":\"tagv3\"},\"timestamp\":1501564455,\"value\":12.3}");
     }
-    
+
     @Test
     public void testPoint1() {
         int timestamp = (int) (time / 1000);

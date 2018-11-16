@@ -1,14 +1,13 @@
 package com.aliyun.hitsdb.client.value.response;
 
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.alibaba.fastjson.JSON;
 import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.response.batch.DetailsResult;
 import com.aliyun.hitsdb.client.value.response.batch.ErrorPoint;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.List;
 
 public class TestDetailsResult {
 

@@ -28,10 +28,10 @@ public class LastPointSubQuery extends HashMap<String, Object> {
     }
 
     public static Builder builder(String metric, Map<String, String> tags) {
-        return new Builder(metric,tags);
+        return new Builder(metric, tags);
     }
 
-    public static Builder builder(List<String> tsuids){
+    public static Builder builder(List<String> tsuids) {
         return new Builder(tsuids);
     }
 

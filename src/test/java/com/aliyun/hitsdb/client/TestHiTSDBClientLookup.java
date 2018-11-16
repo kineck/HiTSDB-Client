@@ -1,9 +1,8 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.util.*;
-
-import com.aliyun.hitsdb.client.value.request.*;
+import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import com.aliyun.hitsdb.client.value.request.LookupRequest;
+import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.response.LookupDetailedResult;
 import com.aliyun.hitsdb.client.value.response.LookupResult;
 import org.junit.After;
@@ -11,14 +10,18 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestHiTSDBClientLookup {
     HiTSDB tsdb;
 
     @Before
     public void init() throws HttpClientInitException {
-        HiTSDBConfig config = HiTSDBConfig.address("localhost", 8242).config();
+        HiTSDBConfig config = HiTSDBConfig.address("", 8242).config();
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -50,16 +53,16 @@ public class TestHiTSDBClientLookup {
         // 生成新的时间线
         for (int i = 0; i < 20; i++) {
             int j = i % 5;
-            tagkv_1.put(Tagk1_prefix+i, Tagv1_prefix+j);
-            tagvk_2.put(Tagv2_prefix+i, Tagk2_prefix+j);
+            tagkv_1.put(Tagk1_prefix + i, Tagv1_prefix + j);
+            tagvk_2.put(Tagv2_prefix + i, Tagk2_prefix + j);
             Point point = Point.metric(Metric1)
-                    .tag(Tagk1_prefix+i, Tagv1_prefix+j)
-                    .tag(Tagk2_prefix+j, Tagv2_prefix+i).timestamp(startTime)
+                    .tag(Tagk1_prefix + i, Tagv1_prefix + j)
+                    .tag(Tagk2_prefix + j, Tagv2_prefix + i).timestamp(startTime)
                     .value(100.00).build();
             putlist.add(point);
             point = Point.metric(Metric2)
-                    .tag(Tagk1_prefix+i, Tagv1_prefix+j)
-                    .tag(Tagk2_prefix+j, Tagv2_prefix+i).timestamp(startTime)
+                    .tag(Tagk1_prefix + i, Tagv1_prefix + j)
+                    .tag(Tagk2_prefix + j, Tagv2_prefix + i).timestamp(startTime)
                     .value(100.00).build();
             putlist.add(point);
         }
@@ -82,7 +85,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 20) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 20 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -129,7 +132,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 8) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 8 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -184,7 +187,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 8) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 8 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -241,7 +244,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 2) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 2 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -296,7 +299,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 4) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 4 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -351,7 +354,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 4) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 4 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -410,7 +413,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 1) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 1 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -458,7 +461,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 4) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 4 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -518,7 +521,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 0) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 0 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
         }
 
@@ -539,7 +542,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 20) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 20 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
 
             for (LookupDetailedResult result : results) {
@@ -585,7 +588,7 @@ public class TestHiTSDBClientLookup {
             if (results.size() != 30) {
                 Assert.fail("Incorrect lookup return result. " +
                         "We are expecting 30 time series satisfy the condition. " +
-                        "Actual :"+ results.size());
+                        "Actual :" + results.size());
             }
         }
     }

@@ -1,24 +1,20 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.aliyun.hitsdb.client.HiTSDB;
-import com.aliyun.hitsdb.client.HiTSDBClientFactory;
-import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.callback.QueryCallback;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class TestHiTSDBClientQueryStringValue {
 
@@ -27,7 +23,7 @@ public class TestHiTSDBClientQueryStringValue {
     @Before
     public void init() throws HttpClientInitException {
         HiTSDBConfig config = HiTSDBConfig.address("127.0.0.1")
-                    .config();
+                .config();
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -51,7 +47,7 @@ public class TestHiTSDBClientQueryStringValue {
                 .timeRange(startTime, now)
                 .sub(SubQuery.metric("hello").aggregator(Aggregator.NONE).tag("tagk1", "tagv1").build())
                 .build();
-        
+
         List<QueryResult> result = tsdb.query(query);
         QueryResult queryResult = result.get(0);
         LinkedHashMap<Long, String> sdps = queryResult.getSdps();

@@ -1,20 +1,19 @@
 package com.aliyun.hitsdb.client.keepalive;
 
-import java.io.IOException;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.aliyun.hitsdb.client.HiTSDB;
 import com.aliyun.hitsdb.client.HiTSDBClientFactory;
 import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.util.UI;
 import com.aliyun.hitsdb.client.value.request.Point;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
 
 public class TestKeepalive {
-    
+
     HiTSDB tsdb;
 
     @Before
@@ -36,7 +35,7 @@ public class TestKeepalive {
             UI.pauseStart();
         }
     }
-    
+
     @After
     public void end() throws IOException {
         tsdb.close();
@@ -46,5 +45,5 @@ public class TestKeepalive {
         int t = (int) (System.currentTimeMillis() / 1000);
         return Point.metric("test-performance").tag("tag", String.valueOf(tag)).value(t, value).build();
     }
-    
+
 }

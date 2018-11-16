@@ -22,7 +22,7 @@ public class LookupTagFilter extends JSONValue {
     }
 
     public String getValue() {
-        return  value;
+        return value;
     }
 
     public void setKey(String key) {

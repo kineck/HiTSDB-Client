@@ -1,9 +1,9 @@
 package com.aliyun.hitsdb.client.callback.http;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.concurrent.FutureCallback;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BaseHttpFutrueCallback implements FutureCallback<HttpResponse> {
 

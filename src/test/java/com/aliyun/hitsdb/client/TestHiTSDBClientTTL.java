@@ -1,15 +1,11 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-
+import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.HiTSDB;
-import com.aliyun.hitsdb.client.HiTSDBClientFactory;
-import com.aliyun.hitsdb.client.HiTSDBConfig;
-import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import java.io.IOException;
 
 public class TestHiTSDBClientTTL {
 

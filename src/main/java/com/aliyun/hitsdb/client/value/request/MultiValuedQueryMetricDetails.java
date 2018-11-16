@@ -31,6 +31,7 @@ public class MultiValuedQueryMetricDetails {
 
         /**
          * set the downsample
+         *
          * @param downsample downsample
          * @return Builder
          */
@@ -43,6 +44,7 @@ public class MultiValuedQueryMetricDetails {
 
         /**
          * set the rate
+         *
          * @param rate rate
          * @return Builder
          */

@@ -1,11 +1,11 @@
 package com.aliyun.hitsdb.client.value.request;
 
+import com.aliyun.hitsdb.client.value.JSONValue;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
-import com.aliyun.hitsdb.client.value.JSONValue;
 
 public class MultiValuedQuery extends JSONValue {
     private long start;
@@ -79,6 +79,7 @@ public class MultiValuedQuery extends JSONValue {
 
     /**
      * set the start time
+     *
      * @param startTime start timestamp
      * @return Builder get a builder
      */
@@ -88,6 +89,7 @@ public class MultiValuedQuery extends JSONValue {
 
     /**
      * set the start date
+     *
      * @param startDate start date
      * @return Builder
      */
@@ -98,8 +100,9 @@ public class MultiValuedQuery extends JSONValue {
 
     /**
      * set the start date and the end date
+     *
      * @param startDate start date
-     * @param endDate end date
+     * @param endDate   end date
      * @return Builder
      */
     public static Builder timeRange(Date startDate, Date endDate) {
@@ -110,8 +113,9 @@ public class MultiValuedQuery extends JSONValue {
 
     /**
      * set the start time and the end time
+     *
      * @param startTime start timestamp
-     * @param endTime end timestamp
+     * @param endTime   end timestamp
      * @return Builder
      */
     public static Builder timeRange(long startTime, long endTime) {

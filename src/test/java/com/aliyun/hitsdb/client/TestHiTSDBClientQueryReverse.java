@@ -3,13 +3,11 @@ package com.aliyun.hitsdb.client;
 import com.aliyun.hitsdb.client.callback.QueryCallback;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.exception.http.HttpUnknowStatusException;
-import com.aliyun.hitsdb.client.value.request.Filter;
 import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
-import com.aliyun.hitsdb.client.value.type.FilterType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +24,9 @@ public class TestHiTSDBClientQueryReverse {
 
     @Before
     public void init() throws HttpClientInitException {
-    		HiTSDBConfig config = HiTSDBConfig
-    		        .address("localhost",8242)
-    		        .config();
+        HiTSDBConfig config = HiTSDBConfig
+                .address("localhost", 8242)
+                .config();
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -49,26 +47,26 @@ public class TestHiTSDBClientQueryReverse {
         long start = current;
         int size = 100;
         String metric = "test-test-metric";
-        Map<String,String> tags = new HashMap<String, String>();
-        tags.put("tagKey","tagValue");
+        Map<String, String> tags = new HashMap<String, String>();
+        tags.put("tagKey", "tagValue");
         List<Point> points = new ArrayList<Point>(size);
-        for(int i = 0;i < size;i ++){
+        for (int i = 0; i < size; i++) {
             Point point = Point.metric(metric)
                     .tag(tags)
-                    .value(start,i).build();
-            start ++;
+                    .value(start, i).build();
+            start++;
             points.add(point);
         }
         tsdb.putSync(points);
 //
         Query query = Query
-                .timeRange(current - 1000,start + 1000)
+                .timeRange(current - 1000, start + 1000)
                 .sub(SubQuery.metric(metric).aggregator(Aggregator.NONE).tag(tags).build())
                 .build();
 
         try {
             List<QueryResult> result = tsdb.query(query);
-            for(QueryResult queryResult : result){
+            for (QueryResult queryResult : result) {
                 System.out.println(queryResult.getDps());
                 System.out.println("-------------");
                 System.out.println(queryResult.getOrderDps());
@@ -82,26 +80,26 @@ public class TestHiTSDBClientQueryReverse {
 
     @Test
     public void testQueryCallback() {
-            long current = System.currentTimeMillis() / 1000;
-            long start = current;
-            int size = 100;
-            String metric = "test-test-metric";
-            Map<String,String> tags = new HashMap<String, String>();
-            tags.put("tagKey","tagValue");
-            List<Point> points = new ArrayList<Point>(size);
-            for(int i = 0;i < size;i ++){
-                Point point = Point.metric(metric)
-                        .tag(tags)
-                        .value(start,i).build();
-                start ++;
-                points.add(point);
-            }
-            tsdb.putSync(points);
+        long current = System.currentTimeMillis() / 1000;
+        long start = current;
+        int size = 100;
+        String metric = "test-test-metric";
+        Map<String, String> tags = new HashMap<String, String>();
+        tags.put("tagKey", "tagValue");
+        List<Point> points = new ArrayList<Point>(size);
+        for (int i = 0; i < size; i++) {
+            Point point = Point.metric(metric)
+                    .tag(tags)
+                    .value(start, i).build();
+            start++;
+            points.add(point);
+        }
+        tsdb.putSync(points);
 //
-            Query query = Query
-                    .timeRange(current - 1000,start + 1000)
-                    .sub(SubQuery.metric(metric).aggregator(Aggregator.NONE).tag(tags).build())
-                    .build();
+        Query query = Query
+                .timeRange(current - 1000, start + 1000)
+                .sub(SubQuery.metric(metric).aggregator(Aggregator.NONE).tag(tags).build())
+                .build();
 
         QueryCallback cb = new QueryCallback() {
 
@@ -109,7 +107,7 @@ public class TestHiTSDBClientQueryReverse {
             public void response(String address, Query input, List<QueryResult> result) {
                 System.out.println("查询参数：" + input);
                 System.out.println("返回结果：" + result);
-                for(QueryResult queryResult : result){
+                for (QueryResult queryResult : result) {
                     System.out.println(queryResult.getDps());
                     System.out.println("-------------");
                     System.out.println(queryResult.getOrderDps());

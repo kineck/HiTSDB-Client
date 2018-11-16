@@ -1,9 +1,9 @@
 package com.aliyun.hitsdb.client.value.request;
 
+import com.aliyun.hitsdb.client.value.JSONValue;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.aliyun.hitsdb.client.value.JSONValue;
 
 public class Timeline extends JSONValue {
 

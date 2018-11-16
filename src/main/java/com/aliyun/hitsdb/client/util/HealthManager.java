@@ -4,11 +4,6 @@ import com.aliyun.hitsdb.client.http.HttpAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Map;
 import java.util.concurrent.*;
 

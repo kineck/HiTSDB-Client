@@ -1,14 +1,14 @@
 package com.aliyun.hitsdb.client.value.request;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.alibaba.fastjson.JSON;
 import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.util.Objects;
 import com.aliyun.hitsdb.client.value.JSONValue;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MultiValuedPoint extends JSONValue {
     public static class MetricBuilder {
@@ -33,8 +33,9 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * add a TagKey and TagValue
+         *
          * @param tagName tagName
-         * @param value value
+         * @param value   value
          * @return MetricBuilder
          */
         public MetricBuilder tag(final String tagName, final String value) {
@@ -48,6 +49,7 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * add the tags
+         *
          * @param tags a map
          * @return MetricBuilder
          */
@@ -60,6 +62,7 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * set timestamp
+         *
          * @param timestamp time
          * @return MetricBuilder
          */
@@ -71,6 +74,7 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * set timestamp
+         *
          * @param date java.util.Date
          * @return MetricBuilder
          */
@@ -83,6 +87,7 @@ public class MultiValuedPoint extends JSONValue {
         /**
          * Set fields (Multi valued structure)
          * For null value, we do not throw exception and we tolerate it by not adding to fields map.
+         *
          * @param fieldName
          * @param fieldValue
          * @return
@@ -104,6 +109,7 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * build a multi-valued data point
+         *
          * @return Point
          */
         public MultiValuedPoint build() {
@@ -129,6 +135,7 @@ public class MultiValuedPoint extends JSONValue {
 
         /**
          * convert to json
+         *
          * @param point
          * @return String
          */
@@ -139,7 +146,8 @@ public class MultiValuedPoint extends JSONValue {
 
     /**
      * set the metric
-     * @param name metric tag key
+     *
+     * @param name  metric tag key
      * @param value metric tag value
      * @return MetricBuilder get a builder
      */
@@ -196,6 +204,7 @@ public class MultiValuedPoint extends JSONValue {
 
     /**
      * If it is true, it is a legitimate character.
+     *
      * @param c char
      * @return
      */
@@ -209,6 +218,7 @@ public class MultiValuedPoint extends JSONValue {
 
     /**
      * Checkout the point format
+     *
      * @param multiValuedPoint multi-valued data point
      */
     public static void checkPoint(MultiValuedPoint multiValuedPoint) {

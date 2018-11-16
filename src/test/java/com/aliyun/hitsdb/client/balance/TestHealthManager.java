@@ -15,7 +15,6 @@ public class TestHealthManager {
     HealthManager healthManager;
 
 
-
     @Before
     public void before() {
         healthManager = new HealthManager();
@@ -35,17 +34,14 @@ public class TestHealthManager {
                 }
             });
         }
-        while (true){
+        while (true) {
 
         }
     }
 
 
-
-
-
     @After
-    public void after(){
+    public void after() {
         healthManager.stop();
     }
 }

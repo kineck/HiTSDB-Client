@@ -1,15 +1,15 @@
 package com.aliyun.hitsdb.client.value.request;
 
+import com.aliyun.hitsdb.client.util.Objects;
+import com.aliyun.hitsdb.client.value.JSONValue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aliyun.hitsdb.client.util.Objects;
-import com.aliyun.hitsdb.client.value.JSONValue;
-
 public class MultiValuedQueryLastRequest extends JSONValue {
-    
+
     private String metric;
     private Map<String, String> tags;
     private List<String> fields;
@@ -77,7 +77,8 @@ public class MultiValuedQueryLastRequest extends JSONValue {
 
     /**
      * Multi-valued query last request builder
-     * @param name metric tag name
+     *
+     * @param name  metric tag name
      * @param value metric tag value
      * @return
      */

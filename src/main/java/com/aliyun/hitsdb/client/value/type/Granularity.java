@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Granularity {
-    S1("1s"),S5("5s"), S15("15s"), M1("1m"), M5("5m"), M15("15m"), M60("60m"), H1("1h"), H2("2h"), H6("6h"), H24("24h");
+    S1("1s"), S5("5s"), S15("15s"), M1("1m"), M5("5m"), M15("15m"), M60("60m"), H1("1h"), H2("2h"), H6("6h"), H24("24h");
 
     private static final Map<String, Granularity> CODE_MAP = new HashMap<String, Granularity>();
 

@@ -1,17 +1,14 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import com.aliyun.hitsdb.client.value.request.Timeline;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.HiTSDB;
-import com.aliyun.hitsdb.client.HiTSDBClientFactory;
-import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
-import com.aliyun.hitsdb.client.value.request.Timeline;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestHiTSDBClientDeleteMeta {
     HiTSDB tsdb;

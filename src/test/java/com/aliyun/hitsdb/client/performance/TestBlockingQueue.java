@@ -1,22 +1,16 @@
 package com.aliyun.hitsdb.client.performance;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
-
+import com.aliyun.hitsdb.client.value.request.Point;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aliyun.hitsdb.client.value.request.Point;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class TestBlockingQueue {
     static final int P_NUM = 10;
@@ -29,14 +23,14 @@ public class TestBlockingQueue {
 
     static final CountDownLatch countDownLatch = new CountDownLatch(P_NUM + C_NUM);
     static final int BatchPutSize = 100;
-    
+
     static class RunnableXiaofei implements Runnable {
 
         @Override
         public void run() {
             Thread.currentThread().setName("消费线程-Thread");
             boolean goOut = false;
-            for (;;) {
+            for (; ; ) {
                 List<Point> points = new ArrayList<Point>(BatchPutSize);
                 for (int i = 0; i < BatchPutSize; i++) {
                     try {

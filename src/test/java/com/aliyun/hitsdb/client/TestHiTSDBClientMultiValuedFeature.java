@@ -5,7 +5,6 @@ import com.aliyun.hitsdb.client.callback.BatchPutCallback;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.value.Result;
 import com.aliyun.hitsdb.client.value.request.*;
-import com.aliyun.hitsdb.client.value.response.MultiValuedQueryLastResult;
 import com.aliyun.hitsdb.client.value.response.MultiValuedQueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
 import org.junit.After;
@@ -32,7 +31,7 @@ public class TestHiTSDBClientMultiValuedFeature {
 
     @Before
     public void init() throws HttpClientInitException {
-        BatchPutCallback pcb = new BatchPutCallback(){
+        BatchPutCallback pcb = new BatchPutCallback() {
 
             final AtomicInteger num = new AtomicInteger();
 
@@ -72,36 +71,36 @@ public class TestHiTSDBClientMultiValuedFeature {
      * Measurement: wind
      * field1: direction
      * field2: speed
-     *           Measurement: wind
+     * Measurement: wind
      * Timestamp   Field: direction  Field: speed
-     *  ts1            45.1             1.8
-     *  ts2            45.2             1.2
-     *  ts3            46               1.9
-     *  ts4            47               null
-     *  ts5            nul              1.1
-     *
+     * ts1            45.1             1.8
+     * ts2            45.2             1.2
+     * ts3            46               1.9
+     * ts4            47               null
+     * ts5            nul              1.1
+     * <p>
      * Query1:
-     *      Filter: speed >= 1.1
-     *      Expecting Result：
-     *         Timestamp   Field: direction  Field: speed
-     *         ts1            45.1             1.8
-     *         ts2            45.2             1.2
-     *         ts3            46               1.9
-     *         ts5            null             1.1
-     *
+     * Filter: speed >= 1.1
+     * Expecting Result：
+     * Timestamp   Field: direction  Field: speed
+     * ts1            45.1             1.8
+     * ts2            45.2             1.2
+     * ts3            46               1.9
+     * ts5            null             1.1
+     * <p>
      * Query2:
-     *      Filter: direction = 46
-     *      Expecting Result：
-     *         Timestamp   Field: direction  Field: speed
-     *         ts3            46               1.9
-     *
+     * Filter: direction = 46
+     * Expecting Result：
+     * Timestamp   Field: direction  Field: speed
+     * ts3            46               1.9
+     * <p>
      * Query3:
-     *      Filter: direction >= 45.1 && speed >= 1.1
-     *      Expecting Result：
-     *          Timestamp   Field: direction  Field: speed
-     *             ts1            45.1             1.8
-     *             ts2            45.2             1.2
-     *             ts3            46               1.9
+     * Filter: direction >= 45.1 && speed >= 1.1
+     * Expecting Result：
+     * Timestamp   Field: direction  Field: speed
+     * ts1            45.1             1.8
+     * ts2            45.2             1.2
+     * ts3            46               1.9
      */
     @Test
     public void testMultiValuedDataPointPutAndQuery_Basic() {
@@ -120,14 +119,14 @@ public class TestHiTSDBClientMultiValuedFeature {
 
         final int SIZE = 5;
         // Negative value means null
-        double[] field1ValueArrays = { 45.1, 45.2, 46, 47, -1};
-        double[] field2ValueArrays = { 1.8, 1.2, 1.9, -1, 1.1};
+        double[] field1ValueArrays = {45.1, 45.2, 46, 47, -1};
+        double[] field2ValueArrays = {1.8, 1.2, 1.9, -1, 1.1};
         long[] timestampArrays = new long[SIZE];
-        for(int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < SIZE; i++) {
             timestampArrays[i] = startTimestamp + i;
         }
 
-        for(int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < SIZE; i++) {
             Double field1Value = (field1ValueArrays[i] >= 0 ? field1ValueArrays[i] : null);
             Double field2Value = (field2ValueArrays[i] >= 0 ? field2ValueArrays[i] : null);
             MultiValuedPoint multiValuedPoint1 = MultiValuedPoint.metric(MEASUREMENT, MEASUREMENT_VALUE)
@@ -253,12 +252,12 @@ public class TestHiTSDBClientMultiValuedFeature {
 
         /** Data Point Insertion */
         for (int i = 0; i < dpsCounter; i++) {
-            if ( i%2 == 0 ) {
+            if (i % 2 == 0) {
                 MultiValuedPoint multiValuedPoint1 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE1)
-                        .fields("input", i*1.0)
-                        .fields("output", i*1.0)
-                        .fields("batchId", i*1.0)
-                        .fields("osVersion", i*1.0)
+                        .fields("input", i * 1.0)
+                        .fields("output", i * 1.0)
+                        .fields("batchId", i * 1.0)
+                        .fields("osVersion", i * 1.0)
                         .tag("iotId", "HDK123456")
                         .tag("productKey", "iPhone123456")
                         .tag("tenantId", "Alibaba")
@@ -270,12 +269,12 @@ public class TestHiTSDBClientMultiValuedFeature {
                 points.add(multiValuedPoint1);
             }
 
-            if ( i%3 == 0 ) {
+            if (i % 3 == 0) {
                 MultiValuedPoint multiValuedPoint2 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE1)
-                        .fields("input", i*1.0 + 1000)
-                        .fields("output", i*1.0 + 1000)
-                        .fields("batchId", i*1.0 + 1000)
-                        .fields("osVersion", i*1.0 + 1000)
+                        .fields("input", i * 1.0 + 1000)
+                        .fields("output", i * 1.0 + 1000)
+                        .fields("batchId", i * 1.0 + 1000)
+                        .fields("osVersion", i * 1.0 + 1000)
                         .tag("iotId", "HDK654321")
                         .tag("productKey", "iWatch123456")
                         .tag("tenantId", "Tencent")
@@ -287,13 +286,13 @@ public class TestHiTSDBClientMultiValuedFeature {
                 points.add(multiValuedPoint2);
             }
 
-            if ( i%5 == 0 ) {
+            if (i % 5 == 0) {
                 MultiValuedPoint multiValuedPoint3 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE1)
-                        .fields("input", i*1.0 + 10000)
-                        .fields("output", i*1.0 + 10000)
-                        .fields("batchId", i*1.0 + 10000)
-                        .fields("value", i*1.0 + 10000)
-                        .fields("osVersion", i*1.0 + 10000)
+                        .fields("input", i * 1.0 + 10000)
+                        .fields("output", i * 1.0 + 10000)
+                        .fields("batchId", i * 1.0 + 10000)
+                        .fields("value", i * 1.0 + 10000)
+                        .fields("osVersion", i * 1.0 + 10000)
                         .tag("iotId", "HDK654321")
                         .tag("productKey", "iPad123456")
                         .tag("tenantId", "Huaiwei")
@@ -323,18 +322,18 @@ public class TestHiTSDBClientMultiValuedFeature {
             hardwarePoints.add(multiValuedPoint4);
             points.add(multiValuedPoint4);
 
-            constructExpectingTuples(points, hardwareExpectingPoints, startTime+i);
+            constructExpectingTuples(points, hardwareExpectingPoints, startTime + i);
             points.clear();
         }
         tsdb.multiValuedPutSync(hardwarePoints);
 
-        for (int i = 0; i < dpsCounter; i ++) {
-            MultiValuedPoint multiValuedPoint5 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME,MULTI_VALUED_MEASUREMENT_VALUE2)
-                    .fields("input", i*1.0 + 1000)
-                    .fields("output", i*1.0 + 1000)
-                    .fields("batchId", i*1.0 + 1000)
-                    .fields("value", i*1.0 + 1000)
-                    .fields("release",i*1.0 + 1000)
+        for (int i = 0; i < dpsCounter; i++) {
+            MultiValuedPoint multiValuedPoint5 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE2)
+                    .fields("input", i * 1.0 + 1000)
+                    .fields("output", i * 1.0 + 1000)
+                    .fields("batchId", i * 1.0 + 1000)
+                    .fields("value", i * 1.0 + 1000)
+                    .fields("release", i * 1.0 + 1000)
                     .tag("iotId", "SDK123456")
                     .tag("productKey", "macOS123456")
                     .tag("company", "Apple")
@@ -345,13 +344,13 @@ public class TestHiTSDBClientMultiValuedFeature {
             points.add(multiValuedPoint5);
             softwarePoints.add(multiValuedPoint5);
 
-            if ( i%2 == 0 ) {
+            if (i % 2 == 0) {
                 MultiValuedPoint multiValuedPoint6 = MultiValuedPoint.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE2)
-                        .fields("input", i*1.0 + 1000)
-                        .fields("output", i*1.0 + 1000)
-                        .fields("batchId", i*1.0 + 1000)
-                        .fields("value", i*1.0 + 1000)
-                        .fields("release", i*1.0 + 1000)
+                        .fields("input", i * 1.0 + 1000)
+                        .fields("output", i * 1.0 + 1000)
+                        .fields("batchId", i * 1.0 + 1000)
+                        .fields("value", i * 1.0 + 1000)
+                        .fields("release", i * 1.0 + 1000)
                         .tag("iotId", "SDK123456")
                         .tag("productKey", "iOS123456")
                         .tag("company", "Apple")
@@ -363,7 +362,7 @@ public class TestHiTSDBClientMultiValuedFeature {
                 softwarePoints.add(multiValuedPoint6);
             }
 
-            constructExpectingTuples(points, softwareExpectingPoints, startTime+i);
+            constructExpectingTuples(points, softwareExpectingPoints, startTime + i);
             points.clear();
         }
         tsdb.multiValuedPutSync(softwarePoints);
@@ -417,7 +416,7 @@ public class TestHiTSDBClientMultiValuedFeature {
         MultiValuedSubQuery subQuery = MultiValuedSubQuery.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE1)
                 .fieldsInfo(metricDetails)
                 .build();
-        MultiValuedQuery query = MultiValuedQuery.start(startTime).end(startTime+dpsCounter).sub(subQuery).build();
+        MultiValuedQuery query = MultiValuedQuery.start(startTime).end(startTime + dpsCounter).sub(subQuery).build();
         MultiValuedQueryResult result = tsdb.multiValuedQuery(query);
         if (result != null) {
             System.out.println("##### Multi-valued Query Result : " + JSON.toJSONString(result));
@@ -435,7 +434,7 @@ public class TestHiTSDBClientMultiValuedFeature {
                 .fieldsInfo(metricDetails)
                 .limit(limit).offset(offset)
                 .build();
-        query = MultiValuedQuery.start(startTime).end(startTime+dpsCounter).sub(subQuery).build();
+        query = MultiValuedQuery.start(startTime).end(startTime + dpsCounter).sub(subQuery).build();
         result = tsdb.multiValuedQuery(query);
         if (result != null) {
             System.out.println("##### Multi-valued Query Result : " + JSON.toJSONString(result));
@@ -485,7 +484,7 @@ public class TestHiTSDBClientMultiValuedFeature {
         metricDetails.add(metricDetail_10);
 
         subQuery = MultiValuedSubQuery.metric(MULTI_VALUED_MEASUREMENT_NAME, MULTI_VALUED_MEASUREMENT_VALUE2).fieldsInfo(metricDetails).build();
-        query = MultiValuedQuery.start(startTime).end(startTime+dpsCounter).sub(subQuery).build();
+        query = MultiValuedQuery.start(startTime).end(startTime + dpsCounter).sub(subQuery).build();
         result = tsdb.multiValuedQuery(query);
         if (result != null) {
             System.out.println("##### Multi-valued Query Result : " + JSON.toJSONString(result));
@@ -587,7 +586,7 @@ public class TestHiTSDBClientMultiValuedFeature {
             List<MultiValuedPoint> existingList = pointsMapWithSameTags.get(tags);
             if (existingList == null) {
                 existingList = new ArrayList<MultiValuedPoint>();
-                pointsMapWithSameTags.put(tags,existingList);
+                pointsMapWithSameTags.put(tags, existingList);
             }
             existingList.add(point);
         }
@@ -612,16 +611,16 @@ public class TestHiTSDBClientMultiValuedFeature {
             // Fill null if necessary
             for (String field : fields) {
 //                dataPointTuple.putIfAbsent(field, null);
-                if(!dataPointTuple.containsKey(field)){
-                    dataPointTuple.put(field,null);
+                if (!dataPointTuple.containsKey(field)) {
+                    dataPointTuple.put(field, null);
                 }
 
             }
 
             for (String tagk : tagks) {
 //                dataPointTuple.putIfAbsent(tagk, null);
-                if(!dataPointTuple.containsKey(tagk)){
-                    dataPointTuple.put(tagk,null);
+                if (!dataPointTuple.containsKey(tagk)) {
+                    dataPointTuple.put(tagk, null);
                 }
 
             }

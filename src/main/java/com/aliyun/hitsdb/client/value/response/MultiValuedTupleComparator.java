@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Comparator;
 import java.util.List;
 
-@JSONType(ignores = { "timestamp" })
+@JSONType(ignores = {"timestamp"})
 public class MultiValuedTupleComparator implements Comparator<List<Object>> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MultiValuedTupleComparator.class);
@@ -40,7 +40,7 @@ public class MultiValuedTupleComparator implements Comparator<List<Object>> {
         Long timestampB = (Long) tupleB.get(0);
 
         if (!timestampA.equals(timestampB)) {
-            comparingResult = (int)(timestampA - timestampB);
+            comparingResult = (int) (timestampA - timestampB);
         } else {
             if (tupleA.size() != tupleB.size()) {
                 comparingResult = (tupleA.size() - tupleB.size());

@@ -7,8 +7,8 @@ package com.aliyun.hitsdb.client.exception.http;
 public class HttpClientConnectionRefusedException extends HttpClientException {
 
     private static final long serialVersionUID = -4155566481009479303L;
-    
-    public HttpClientConnectionRefusedException(String address,Exception e) {
+
+    public HttpClientConnectionRefusedException(String address, Exception e) {
         super(e);
     }
 

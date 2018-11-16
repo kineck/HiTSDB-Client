@@ -1,17 +1,12 @@
 package com.aliyun.hitsdb.client.http.response;
 
-import java.io.IOException;
-
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.StatusLine;
+import com.aliyun.hitsdb.client.exception.http.HttpClientException;
+import com.aliyun.hitsdb.client.http.HttpClient;
+import org.apache.http.*;
 import org.apache.http.client.entity.GzipDecompressingEntity;
 import org.apache.http.util.EntityUtils;
 
-import com.aliyun.hitsdb.client.exception.http.HttpClientException;
-import com.aliyun.hitsdb.client.http.HttpClient;
+import java.io.IOException;
 
 public class ResultResponse {
     private int statusCode;
@@ -24,7 +19,7 @@ public class ResultResponse {
         super();
         this.statusCode = statusCode;
         if (statusCode >= 200 && statusCode < 300) {
-            if(statusCode == 204){
+            if (statusCode == 204) {
                 this.httpStatus = HttpStatus.ServerSuccessNoContent;
             } else {
                 this.httpStatus = HttpStatus.ServerSuccess;

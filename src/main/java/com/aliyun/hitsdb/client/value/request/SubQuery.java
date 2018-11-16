@@ -1,14 +1,17 @@
 package com.aliyun.hitsdb.client.value.request;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONType;
 import com.aliyun.hitsdb.client.util.Objects;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
 import com.aliyun.hitsdb.client.value.type.FilterType;
 import com.aliyun.hitsdb.client.value.type.Granularity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @JSONType(ignores = {"aggregatorType", "granularityType"})
 public class SubQuery {
@@ -282,7 +285,7 @@ public class SubQuery {
             subQuery.tags = this.tags;
             subQuery.rate = this.rate;
             if (this.rateOptions != null) {
-				subQuery.rateOptions = this.rateOptions;
+                subQuery.rateOptions = this.rateOptions;
             }
             subQuery.granularityType = this.granularityType;
             subQuery.realTimeSeconds = this.realTimeSeconds;

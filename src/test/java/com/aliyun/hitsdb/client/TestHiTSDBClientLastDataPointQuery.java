@@ -24,7 +24,7 @@ public class TestHiTSDBClientLastDataPointQuery {
         HiTSDBConfig config = HiTSDBConfig
                 .address("127.0.0.1", 8242)
                 .config();
-        
+
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -39,13 +39,13 @@ public class TestHiTSDBClientLastDataPointQuery {
 
     @Test
     public void testMetricLast() {
-        Map<String,String> tags = new HashMap<String, String>();
-        tags.put("uid","1");
-        tags.put("id","6");
+        Map<String, String> tags = new HashMap<String, String>();
+        tags.put("uid", "1");
+        tags.put("id", "6");
         LastPointQuery query = LastPointQuery
                 .builder().backScan(0).msResolution(true)
                 .timestamp(1537520409729l)
-                .sub(LastPointSubQuery.builder("test.1",tags).build()).build();
+                .sub(LastPointSubQuery.builder("test.1", tags).build()).build();
         System.out.println(query.toJSON());
         List<LastDataValue> lastDataValues = tsdb.queryLast(query);
 
@@ -66,5 +66,5 @@ public class TestHiTSDBClientLastDataPointQuery {
 
         System.out.println(lastDataValues);
     }
-    
+
 }

@@ -1,9 +1,12 @@
 package com.aliyun.hitsdb.client.value.request;
 
-import java.util.*;
-
 import com.alibaba.fastjson.JSON;
 import com.aliyun.hitsdb.client.util.Objects;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MultiValuedSubQuery {
     private String metric;
@@ -73,6 +76,7 @@ public class MultiValuedSubQuery {
         /**
          * add a tagkey and tagvalue
          * when tagk or tagv is null, we simply ignore this given tag filter as it's not valid.
+         *
          * @param tagk tagkey
          * @param tagv tagvalue
          * @return Builder
@@ -86,6 +90,7 @@ public class MultiValuedSubQuery {
 
         /**
          * add the tags
+         *
          * @param tags the map
          * @return Builder
          */
@@ -116,7 +121,8 @@ public class MultiValuedSubQuery {
 
     /**
      * Multi-valued sub query builder
-     * @param name metric tag name
+     *
+     * @param name  metric tag name
      * @param value metric tag value
      * @return
      */

@@ -1,13 +1,5 @@
 package com.aliyun.hitsdb.client.connection;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.aliyun.hitsdb.client.HiTSDB;
 import com.aliyun.hitsdb.client.HiTSDBClientFactory;
 import com.aliyun.hitsdb.client.HiTSDBConfig;
@@ -16,19 +8,26 @@ import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.util.UI;
 import com.aliyun.hitsdb.client.value.Result;
 import com.aliyun.hitsdb.client.value.request.Point;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class TestKeepaliveConnection {
     HiTSDB tsdb;
 
-    
+
     @Before
     public void init() throws HttpClientInitException {
         UI.pauseStart();
-        
+
         HiTSDBConfig config = HiTSDBConfig
                 .address(".address(", 8242)
                 .httpConnectionPool(1)
-                 .httpConnectTimeout(200)
+                .httpConnectTimeout(200)
                 .batchPutSize(100).listenBatchPut(new BatchPutCallback() {
                     final AtomicLong num = new AtomicLong();
 

@@ -13,5 +13,5 @@ public class HttpServerNotSupportException extends HttpUnknowStatusException {
     }
 
     private static final long serialVersionUID = 3183070191347274019L;
-    
+
 }

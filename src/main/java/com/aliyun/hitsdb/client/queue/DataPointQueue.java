@@ -1,15 +1,14 @@
 package com.aliyun.hitsdb.client.queue;
 
+import com.aliyun.hitsdb.client.exception.BufferQueueFullException;
+import com.aliyun.hitsdb.client.value.request.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aliyun.hitsdb.client.exception.BufferQueueFullException;
-import com.aliyun.hitsdb.client.value.request.Point;
 
 public class DataPointQueue implements DataQueue {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataPointQueue.class);
@@ -18,7 +17,7 @@ public class DataPointQueue implements DataQueue {
     private final int waitCloseTimeLimit;
     private final boolean backpressure;
 
-    public DataPointQueue(int size,int waitCloseTimeLimit,boolean backpressure) {
+    public DataPointQueue(int size, int waitCloseTimeLimit, boolean backpressure) {
         this.pointQueue = new ArrayBlockingQueue<Point>(size);
         this.waitCloseTimeLimit = waitCloseTimeLimit;
         this.backpressure = backpressure;
@@ -28,19 +27,19 @@ public class DataPointQueue implements DataQueue {
         if (forbiddenWrite.get()) {
             throw new IllegalStateException("client has been closed.");
         }
-        
-        if(this.backpressure){
+
+        if (this.backpressure) {
             try {
                 pointQueue.put(point);
             } catch (InterruptedException e) {
-                LOGGER.error("Client Thread been Interrupted.",e);
+                LOGGER.error("Client Thread been Interrupted.", e);
                 return;
             }
         } else {
             try {
                 pointQueue.add(point);
-            } catch(IllegalStateException exception) {
-                throw new BufferQueueFullException("The buffer queue is full.",exception);
+            } catch (IllegalStateException exception) {
+                throw new BufferQueueFullException("The buffer queue is full.", exception);
             }
         }
     }
@@ -70,11 +69,11 @@ public class DataPointQueue implements DataQueue {
             } catch (InterruptedException e) {
                 LOGGER.warn("The method waitEmpty() is being illegally interrupted");
             }
-            
+
             while (true) {
                 boolean empty = pointQueue.isEmpty();
                 if (empty) {
-                    return ;
+                    return;
                 } else {
                     try {
                         Thread.sleep(waitCloseTimeLimit);
@@ -87,8 +86,8 @@ public class DataPointQueue implements DataQueue {
             throw new IllegalStateException(
                     "The queue is still allowed to write data. you must first call the forbiddenSend() method");
         }
-        
-        
+
+
     }
 
     @Override

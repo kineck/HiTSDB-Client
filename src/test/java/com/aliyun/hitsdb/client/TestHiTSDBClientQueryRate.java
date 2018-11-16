@@ -21,7 +21,7 @@ public class TestHiTSDBClientQueryRate {
     @Before
     public void init() throws HttpClientInitException {
         HiTSDBConfig config = HiTSDBConfig
-    		        .address("localhost",8242)
+                .address("localhost", 8242)
                 .config();
         tsdb = HiTSDBClientFactory.connect(config);
     }
@@ -45,7 +45,7 @@ public class TestHiTSDBClientQueryRate {
                 .sub(SubQuery.metric("metric").aggregator(Aggregator.SUM)
                         .rate()
                         .downsample("1m-avg")
-                        .tag("tagk1","tagv1")
+                        .tag("tagk1", "tagv1")
                         .build())
                 .build();
 
@@ -70,7 +70,7 @@ public class TestHiTSDBClientQueryRate {
                 .sub(SubQuery.metric("metric").aggregator(Aggregator.SUM)
                         .rate(RateOptions.newBuilder().counter(false).dropResets(true).build())
                         .downsample("1m-avg")
-                        .tag("tagk1","tagv1")
+                        .tag("tagk1", "tagv1")
                         .build())
                 .build();
 

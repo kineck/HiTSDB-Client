@@ -22,7 +22,7 @@ public class DumpMetaValue extends JSONValue {
         this.dump_metric = false;
     }
 
-    public DumpMetaValue(String tagkey, String tagvalueprefix, int max,boolean dumpMetric) {
+    public DumpMetaValue(String tagkey, String tagvalueprefix, int max, boolean dumpMetric) {
         super();
         this.tagkey = tagkey;
         this.tagvalueprefix = tagvalueprefix;
@@ -30,7 +30,7 @@ public class DumpMetaValue extends JSONValue {
         this.dump_metric = dumpMetric;
     }
 
-    public DumpMetaValue(String metric,String tagkey, String tagvalueprefix, int max) {
+    public DumpMetaValue(String metric, String tagkey, String tagvalueprefix, int max) {
         super();
         this.metric = metric;
         this.tagkey = tagkey;

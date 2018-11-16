@@ -1,7 +1,7 @@
 package com.aliyun.hitsdb.client.performance;
 
-import com.aliyun.hitsdb.client.HiTSDBHAClient;
 import com.aliyun.hitsdb.client.HiTSDBConfig;
+import com.aliyun.hitsdb.client.HiTSDBHAClient;
 import com.aliyun.hitsdb.client.value.Result;
 import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.request.Query;

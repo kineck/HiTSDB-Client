@@ -1,10 +1,10 @@
 package com.aliyun.hitsdb.client.value.request;
 
+import com.aliyun.hitsdb.client.value.JSONValue;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.aliyun.hitsdb.client.value.JSONValue;
 
 public class BatchPoints extends JSONValue {
     public static class Builder {

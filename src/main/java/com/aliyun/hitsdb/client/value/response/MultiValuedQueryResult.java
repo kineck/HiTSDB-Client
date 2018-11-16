@@ -1,11 +1,13 @@
 package com.aliyun.hitsdb.client.value.response;
 
-import java.util.*;
-
 import com.alibaba.fastjson.annotation.JSONType;
 import com.aliyun.hitsdb.client.value.JSONValue;
 
-@JSONType(ignores = { "dps", "aggregateTags" })
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+@JSONType(ignores = {"dps", "aggregateTags"})
 public class MultiValuedQueryResult extends JSONValue {
     private String name;
     private List<List<String>> aggregateTags;

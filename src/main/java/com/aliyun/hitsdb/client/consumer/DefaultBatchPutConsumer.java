@@ -1,16 +1,15 @@
 package com.aliyun.hitsdb.client.consumer;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.http.HttpClient;
 import com.aliyun.hitsdb.client.queue.DataQueue;
 import com.google.common.util.concurrent.RateLimiter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class DefaultBatchPutConsumer implements Consumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultBatchPutConsumer.class);
@@ -34,7 +33,7 @@ public class DefaultBatchPutConsumer implements Consumer {
 
     public void start() {
         for (int i = 0; i < batchPutConsumerThreadCount; i++) {
-            threadPool.submit(new BatchPutRunnable(this.dataQueue, this.httpclient, this.config,this.countDownLatch,this.rateLimiter));
+            threadPool.submit(new BatchPutRunnable(this.dataQueue, this.httpclient, this.config, this.countDownLatch, this.rateLimiter));
         }
     }
 
@@ -51,10 +50,10 @@ public class DefaultBatchPutConsumer implements Consumer {
                 threadPool.shutdownNow();
             } else {
                 // 截断消费者线程。
-                while(!threadPool.isShutdown() || !threadPool.isTerminated()){
+                while (!threadPool.isShutdown() || !threadPool.isTerminated()) {
                     threadPool.shutdownNow();
                 }
-                
+
                 // 等待所有消费者线程结束。
                 try {
                     countDownLatch.await();

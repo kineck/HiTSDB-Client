@@ -1,15 +1,5 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.aliyun.hitsdb.client.HiTSDB;
-import com.aliyun.hitsdb.client.HiTSDBClientFactory;
-import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.callback.QueryCallback;
 import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
 import com.aliyun.hitsdb.client.exception.http.HttpUnknowStatusException;
@@ -17,6 +7,12 @@ import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
 import com.aliyun.hitsdb.client.value.type.Aggregator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.List;
 
 public class TestHiTSDBClientQuery {
 
@@ -24,9 +20,9 @@ public class TestHiTSDBClientQuery {
 
     @Before
     public void init() throws HttpClientInitException {
-    		HiTSDBConfig config = HiTSDBConfig
-    		        .address("localhost",8242)
-    		        .config();
+        HiTSDBConfig config = HiTSDBConfig
+                .address("localhost", 8242)
+                .config();
         tsdb = HiTSDBClientFactory.connect(config);
     }
 
@@ -46,31 +42,31 @@ public class TestHiTSDBClientQuery {
 //        calendar.add(Calendar.DATE, -3);
 //        Date startTime = calendar.getTime();
 //	    	int t0 = (int) (1508742134297l/1000);
-	    	int t1 = (int) (1508742134297l/1000);
-	    int 	t0 = t1 - 100;
+        int t1 = (int) (1508742134297l / 1000);
+        int t0 = t1 - 100;
         Query query = Query
                 .timeRange(t0, t1)
                 .sub(SubQuery.metric("test-test-test").aggregator(Aggregator.NONE).build())
 //                .sub(SubQuery.metric("test-test-test").aggregator(Aggregator.NONE).tag("b", "2").build())
                 .build();
-        
+
         try {
-	    		List<QueryResult> result = tsdb.query(query);
-	    		System.out.println("查询结果：" + result.size());
-	    		System.out.println("查询结果：" + result);
+            List<QueryResult> result = tsdb.query(query);
+            System.out.println("查询结果：" + result.size());
+            System.out.println("查询结果：" + result);
         } catch (HttpUnknowStatusException e) {
-    			e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     @Test
     public void testQueryCallback() {
-    	
+
 //	    	int t0 = (int) (1508742134297l/1000);
-	    	int t1 = (int) (1508742134297l/1000);
-	    	int t0 = t1 - 1;
+        int t1 = (int) (1508742134297l / 1000);
+        int t0 = t1 - 1;
         Query query = Query.timeRange(t0, t1)
-        			.sub(SubQuery.metric("test-test-test").aggregator(Aggregator.AVG).tag("level", "500").build())
+                .sub(SubQuery.metric("test-test-test").aggregator(Aggregator.AVG).tag("level", "500").build())
                 .build();
 
         QueryCallback cb = new QueryCallback() {

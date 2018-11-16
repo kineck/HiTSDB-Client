@@ -1,12 +1,12 @@
 package com.aliyun.hitsdb.client.value.response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.aliyun.hitsdb.client.value.JSONValue;
 import com.aliyun.hitsdb.client.value.request.LookupTagFilter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LookupResult extends JSONValue {
     private String type;

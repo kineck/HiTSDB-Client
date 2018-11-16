@@ -16,14 +16,14 @@ public class TestBalClient {
     public static void main(String[] args) throws IOException {
         HiTSDB client = new BalHiTSDBClient(new File("conf/tsdb.conf"));
         try {
-            for(int i = 0;i < 10000;i ++){
+            for (int i = 0; i < 10000; i++) {
                 client.putSync(Point.metric("hh.test")
-                        .tag("hh","hh")
-                        .value(System.currentTimeMillis(),1234)
+                        .tag("hh", "hh")
+                        .value(System.currentTimeMillis(), 1234)
                         .build());
                 Thread.sleep(1000);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

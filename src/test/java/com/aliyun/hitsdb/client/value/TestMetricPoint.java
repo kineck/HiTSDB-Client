@@ -1,18 +1,17 @@
 package com.aliyun.hitsdb.client.value;
 
+import com.aliyun.hitsdb.client.value.request.Point;
+import com.aliyun.hitsdb.client.value.type.Granularity;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.aliyun.hitsdb.client.value.request.Point;
-import com.aliyun.hitsdb.client.value.type.Granularity;
-
 public class TestMetricPoint {
-    
+
     @Test
     public void testBuild() {
         String metric = "test";
@@ -41,10 +40,10 @@ public class TestMetricPoint {
         String json = point.toJSON();
         Assert.assertEquals(json, "{\"metric\":\"test\",\"tags\":{\"tagk1\":\"tagv1\",\"tagk2\":\"tagv2\",\"tagk3\":\"tagv3\"},\"timestamp\":0}");
         Granularity granularityType = point.getGranularityType();
-        Assert.assertEquals(granularityType,Granularity.S1);
-        Assert.assertEquals(granularityType.getName(),"1s");
+        Assert.assertEquals(granularityType, Granularity.S1);
+        Assert.assertEquals(granularityType.getName(), "1s");
     }
-    
+
     @Test
     public void testBuildGranularity_H1() {
         String metric = "test";
@@ -58,9 +57,9 @@ public class TestMetricPoint {
         Assert.assertEquals(json, "{\"granularity\":\"1h\",\"metric\":\"test\",\"tags\":{\"tagk1\":\"tagv1\",\"tagk2\":\"tagv2\",\"tagk3\":\"tagv3\"},\"timestamp\":0}");
         Granularity granularityType = point.getGranularityType();
         Assert.assertEquals(granularityType, Granularity.H1);
-        Assert.assertEquals(granularityType.getName(),"1h");
+        Assert.assertEquals(granularityType.getName(), "1h");
     }
-    
+
     @Test
     public void testBuildTagMap() {
         String metric = "test";
@@ -79,7 +78,7 @@ public class TestMetricPoint {
     @Test
     public void testPoint() throws ParseException {
         String metric = "test";
-        
+
         String strDate = "2017-08-01 13:14:15";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long time = sdf.parse(strDate).getTime();
@@ -92,7 +91,7 @@ public class TestMetricPoint {
         Assert.assertEquals(json,
                 "{\"metric\":\"test\",\"tags\":{\"tagk1\":\"tagv1\",\"tagk2\":\"tagv2\",\"tagk3\":\"tagv3\"},\"timestamp\":1501564455,\"value\":12.3}");
     }
-    
+
     @Test
     public void testPointVersion() throws ParseException {
         String metric = "test";

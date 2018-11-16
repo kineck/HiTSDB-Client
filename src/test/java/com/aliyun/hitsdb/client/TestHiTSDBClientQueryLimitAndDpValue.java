@@ -1,9 +1,7 @@
 package com.aliyun.hitsdb.client;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
+import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.request.Query;
 import com.aliyun.hitsdb.client.value.request.SubQuery;
 import com.aliyun.hitsdb.client.value.response.QueryResult;
@@ -12,11 +10,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.aliyun.hitsdb.client.exception.http.HttpClientInitException;
-import com.aliyun.hitsdb.client.value.request.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestHiTSDBClientQueryLimitAndDpValue {
     private static final Logger LOG = LoggerFactory.getLogger(TestHiTSDBClientQueryLimitAndDpValue.class);
@@ -38,7 +37,7 @@ public class TestHiTSDBClientQueryLimitAndDpValue {
         }
     }
 
-    public static void queryAssert(HiTSDB tsdb,Query query,List<Point> putlist) throws InterruptedException {
+    public static void queryAssert(HiTSDB tsdb, Query query, List<Point> putlist) throws InterruptedException {
         LOG.info("query = " + query.toString());
         List<QueryResult> queryResults = tsdb.query(query);
         contentAssert(putlist, queryResults);
@@ -53,11 +52,11 @@ public class TestHiTSDBClientQueryLimitAndDpValue {
             }
 
             if (putlist.size() != totalResultSize) {
-                Assert.fail("put ("+putlist.size()+") And query size ("+queryResults.get(0).getDps().size()+") not same");
+                Assert.fail("put (" + putlist.size() + ") And query size (" + queryResults.get(0).getDps().size() + ") not same");
             }
 
         } else {
-            if (putlist.size()!=0) {
+            if (putlist.size() != 0) {
                 Assert.fail("put data points but query set is empty.");
             }
         }

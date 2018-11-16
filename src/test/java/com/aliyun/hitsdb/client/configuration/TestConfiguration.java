@@ -1,13 +1,12 @@
 package com.aliyun.hitsdb.client.configuration;
 
-import java.util.List;
-
-import org.junit.Test;
-
 import com.aliyun.hitsdb.client.HiTSDBConfig;
 import com.aliyun.hitsdb.client.callback.BatchPutCallback;
 import com.aliyun.hitsdb.client.value.Result;
 import com.aliyun.hitsdb.client.value.request.Point;
+import org.junit.Test;
+
+import java.util.List;
 
 public class TestConfiguration {
 
@@ -17,7 +16,7 @@ public class TestConfiguration {
         HiTSDBConfig config = HiTSDBConfig.address("127.0.0.1", 8242) // 地址，第一个参数可以是域名，IP，或者VIPServer的域名。
                 .asyncPut(true)
                 .readonly(false)
-        			.batchPutBufferSize(20000) // 客户端缓冲队列长度，默认为10000。
+                .batchPutBufferSize(20000) // 客户端缓冲队列长度，默认为10000。
                 .batchPutConsumerThreadCount(2) // 缓冲队列消费线程数，默认为1。
                 .batchPutSize(800) // 每次批次提交给客户端点的个数，默认为500。
                 .batchPutTimeLimit(100) // 每次等待最大时间限制，单位为ms，默认为200。

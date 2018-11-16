@@ -1,11 +1,11 @@
 package com.aliyun.hitsdb.client.value.response;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.aliyun.hitsdb.client.value.JSONValue;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LookupDetailedResult extends JSONValue {
     private Map<String, String> tags = new LinkedHashMap<String, String>();

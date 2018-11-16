@@ -165,7 +165,7 @@ public class BalHiTSDBClient implements HiTSDB {
     }
 
 
-    private void doHandle(File file){
+    private void doHandle(File file) {
         LOG.info("the config file {} has been modified, so reload it", file.getName());
         HiTSDBConfig newConfig = null;
         try {
@@ -228,7 +228,7 @@ public class BalHiTSDBClient implements HiTSDB {
                 for (HiTSDB tsdb : nonHealthClientMap.values()) {
                     tsdb.close();
                 }
-            } catch (IOException ex){
+            } catch (IOException ex) {
                 LOG.error("closed the new tsdb client instance error", ex);
             }
             clients.clear();
@@ -345,7 +345,7 @@ public class BalHiTSDBClient implements HiTSDB {
 
     private HiTSDB client() {
         // 等待更新结束
-        while (!SYNC.get());
+        while (!SYNC.get()) ;
         if (clients.isEmpty()) {
             throw new RuntimeException("The number of available clients is zero, please check it");
         }
@@ -429,7 +429,7 @@ public class BalHiTSDBClient implements HiTSDB {
             try {
                 return client().putSync(points);
             } catch (Exception e) {
-                for(Point point : points){
+                for (Point point : points) {
 
                 }
                 exception = e;
@@ -867,7 +867,7 @@ public class BalHiTSDBClient implements HiTSDB {
 
     @Override
     public boolean truncate() throws HttpUnknowStatusException {
-       return client().truncate();
+        return client().truncate();
     }
 
     @Override

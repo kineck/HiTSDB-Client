@@ -1,9 +1,9 @@
 package com.aliyun.hitsdb.client.callback;
 
-import java.util.List;
-
 import com.aliyun.hitsdb.client.value.request.Point;
 import com.aliyun.hitsdb.client.value.response.batch.SummaryResult;
+
+import java.util.List;
 
 public abstract class BatchPutSummaryCallback extends AbstractBatchPutCallback<SummaryResult> {
 

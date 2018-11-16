@@ -1,11 +1,5 @@
 package com.aliyun.hitsdb.client.http;
 
-import java.io.IOException;
-import java.nio.CharBuffer;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
@@ -16,11 +10,13 @@ import org.apache.http.nio.client.methods.AsyncCharConsumer;
 import org.apache.http.nio.client.methods.HttpAsyncMethods;
 import org.apache.http.nio.protocol.HttpAsyncRequestProducer;
 import org.apache.http.protocol.HttpContext;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+
+import java.io.IOException;
+import java.nio.CharBuffer;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class TestHttpAsyncClient {
 
@@ -50,7 +46,7 @@ public class TestHttpAsyncClient {
 
     @Test
     public void testHttpSyncClient() throws IOException {
-        
+
         // Start the client
         httpclient.start();
 
